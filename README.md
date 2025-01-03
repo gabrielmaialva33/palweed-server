@@ -1,7 +1,7 @@
 <table style="width:100%" align="center" border="0">
   <tr align="center">
     <td><img src=".github/assets/logo.png" alt="PalWeed" width="200"></td>
-    <td><h1>🐉 ＰａｌＷｅｅｄ 🔥</h1></td>
+    <td><h1>🐉 ＰａｌＷｅｅｄ 🐦‍🔥</h1></td>
   </tr>
 </table>
 
