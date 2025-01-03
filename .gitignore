@@ -3,3 +3,4 @@
 docker-compose.dev.yml
 backup
 !backups/*.tar.gz
+palworld/
