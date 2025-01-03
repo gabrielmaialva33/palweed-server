@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Repository directory
 REPO_DIR = "/root/palweed-server"
-BACKUP_DIR = os.path.join(REPO_DIR, "palworld/backups")
+BACKUP_DIR = os.path.join(REPO_DIR, "palworld/backups")  # Correct backup location
 BRANCH_NAME = "backup"
 
 
@@ -42,9 +42,7 @@ def git_push(backup_file):
 # Main function to orchestrate the process
 def main():
     try:
-        # Create the backup and get the backup file name
         backup_file = create_backup()
-        # Push the backup file to the Git repository
         git_push(backup_file)
         print("Backup and push completed successfully!")
     except subprocess.CalledProcessError as e:

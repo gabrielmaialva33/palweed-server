@@ -6,17 +6,21 @@ REPO_DIR="/root/palweed-server"
 echo "Changing directory to ${REPO_DIR}"
 cd "${REPO_DIR}"
 
+# Ensure the main branch is checked out
+echo "Switching to main branch"
+git checkout main
+
 # Build and start Docker services
 echo "Starting Docker Compose with build..."
 docker compose up --build -d
 
 # Wait for the Docker container to initialize
 echo "Waiting for Docker container to be ready..."
-sleep 10  # Adjust time if necessary
+sleep 10  # Adjust if necessary
 
-# Run initial Docker backup
-echo "Running initial Docker backup..."
-docker exec palworld-server backup
+# Run initial backup
+echo "Running initial backup..."
+/usr/bin/python3 "${REPO_DIR}/backup_script.py"
 
 # Check if cron is installed
 if ! command -v cron &> /dev/null; then
@@ -29,15 +33,5 @@ fi
 echo "Starting cron service..."
 service cron start
 
-# Define the cron job to run the backup script hourly
-CRON_JOB="0 * * * * /usr/bin/python3 ${REPO_DIR}/backup_script.py >> /var/log/palweed_backup.log 2>&1"
-
-# Add cron job if it doesn't exist
-echo "Configuring cron job..."
-(crontab -l 2>/dev/null | grep -q "${CRON_JOB}") || (crontab -l 2>/dev/null; echo "${CRON_JOB}") | crontab -
-
-# Show cron jobs to confirm
-echo "Current cron jobs:"
-crontab -l
-
-echo "Initialization complete!"
+# Define the cron job to run the backup script every hour
+CRON_JOB="0 * * * * /usr
