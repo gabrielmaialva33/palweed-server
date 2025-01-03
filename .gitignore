@@ -9,6 +9,6 @@ backup
 
 # Ignore "palworld" folder but allow "backups" tar.gz files
 palworld/
+!palworld/
 !palworld/backups/
 !palworld/backups/*.tar.gz
-!palworld/
