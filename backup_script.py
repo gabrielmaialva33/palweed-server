@@ -28,8 +28,8 @@ def git_push(backup_file):
     print("Switching to the 'backup' branch")
     subprocess.run(["git", "checkout", BRANCH_NAME], cwd=REPO_DIR, check=True)
 
-    print("Adding the new backup")
-    subprocess.run(["git", "add", f"palworld/backups/{backup_file}"], cwd=REPO_DIR, check=True)
+    print("Forcing addition of the new backup")
+    subprocess.run(["git", "add", "-f", f"palworld/backups/{backup_file}"], cwd=REPO_DIR, check=True)
 
     print("Committing changes")
     subprocess.run(["git", "commit", "-m", f"chore: backup created at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"],

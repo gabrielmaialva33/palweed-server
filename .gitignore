@@ -1,8 +1,13 @@
+# IDE and environment files
 .idea
 .env
-docker-compose.dev.yml
+
+# Ignore the "backup" folder except for tar.gz files
 backup
 !backup/.gitkeep
 !backup/*.tar.gz
-!palworld/backups/*.tar.gz
+
+# Ignore the "palworld" folder but allow "backups" tar.gz files
 palworld/
+!palworld/backups/
+!palworld/backups/*.tar.gz
