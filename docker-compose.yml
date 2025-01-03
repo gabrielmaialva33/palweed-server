@@ -9,6 +9,8 @@ services:
     ports:
       - "${PORT}:${PORT}/udp"
       - "27015:27015/udp"
+    env_file:
+      - .env
     environment:
       # Server settings
       PUID: ${PUID}
