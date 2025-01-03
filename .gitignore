@@ -7,7 +7,8 @@ backup
 !backup/.gitkeep
 !backup/*.tar.gz
 
-# Ignore the "palworld" folder but allow "backups" tar.gz files
+# Ignore "palworld" folder but allow "backups" tar.gz files
 palworld/
 !palworld/backups/
 !palworld/backups/*.tar.gz
+!palworld/
