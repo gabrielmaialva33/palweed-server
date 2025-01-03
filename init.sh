@@ -34,4 +34,4 @@ echo "Starting cron service..."
 service cron start
 
 # Define the cron job to run the backup script every hour
-CRON_JOB="0 * * * * /usr
+CRON_JOB="0 * * * * /usr"
