@@ -6,9 +6,10 @@ REPO_DIR="/root/palweed-server"
 echo "Changing directory to ${REPO_DIR}"
 cd "${REPO_DIR}"
 
-# Ensure the main branch is checked out
+# Ensure the main branch is checked out and up-to-date
 echo "Switching to main branch"
 git checkout main
+git pull --rebase
 
 # Build and start Docker services
 echo "Starting Docker Compose with build..."
@@ -21,13 +22,6 @@ sleep 10  # Adjust if necessary
 # Run initial backup
 echo "Running initial backup..."
 /usr/bin/python3 "${REPO_DIR}/backup_script.py"
-
-# Check if cron is installed
-if ! command -v cron &> /dev/null; then
-    echo "Installing cron..."
-    apt update
-    apt install -y cron
-fi
 
 # Ensure cron service is running
 echo "Starting cron service..."

@@ -2,8 +2,9 @@
 .idea
 .env
 
-# Ignore "palworld" folder but allow "backups" tar.gz files
+# ignore all files in the root directory
 palworld/
-!palworld/
+
+# allow all files in the root directory
 !palworld/backups/
 !palworld/backups/*.tar.gz

@@ -7,6 +7,7 @@ REPO_DIR = "/root/palweed-server"
 BACKUP_DIR = os.path.join(REPO_DIR, "palworld/backups")  # Backup folder
 BRANCH_NAME = "main"  # Use main branch
 
+
 # Function to create a backup using Docker
 def create_backup():
     print("Creating backup using Docker...")
@@ -20,13 +21,17 @@ def create_backup():
     print(f"Latest backup created: {latest_backup}")
     return os.path.basename(latest_backup)
 
+
 # Function to handle Git commit and push
 def git_push(backup_file):
     print("Switching to the 'main' branch")
     subprocess.run(["git", "checkout", BRANCH_NAME], cwd=REPO_DIR, check=True)
 
-    print("Adding the new backup")
-    subprocess.run(["git", "add", "-f", f"palworld/backups/{backup_file}"], cwd=REPO_DIR, check=True)
+    print("Pulling latest changes from remote")
+    subprocess.run(["git", "pull", "--rebase"], cwd=REPO_DIR, check=True)
+
+    print("Adding only the backup file")
+    subprocess.run(["git", "add", f"palworld/backups/{backup_file}"], cwd=REPO_DIR, check=True)
 
     print("Committing changes")
     subprocess.run(["git", "commit", "-m", f"chore: backup created at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"],
@@ -34,6 +39,7 @@ def git_push(backup_file):
 
     print("Pushing to remote repository")
     subprocess.run(["git", "push", "origin", BRANCH_NAME], cwd=REPO_DIR, check=True)
+
 
 # Main function to orchestrate the process
 def main():
@@ -43,6 +49,7 @@ def main():
         print("Backup and push completed successfully!")
     except subprocess.CalledProcessError as e:
         print(f"Error during backup or git push: {e}")
+
 
 if __name__ == "__main__":
     main()
