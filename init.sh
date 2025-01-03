@@ -10,6 +10,14 @@ cd "${REPO_DIR}"
 echo "Starting Docker Compose with build..."
 docker compose up --build -d
 
+# Wait for the Docker container to initialize
+echo "Waiting for Docker container to be ready..."
+sleep 10  # Adjust time if necessary
+
+# Run initial Docker backup
+echo "Running initial Docker backup..."
+docker exec palworld-server backup
+
 # Check if cron is installed
 if ! command -v cron &> /dev/null; then
     echo "Installing cron..."
@@ -21,7 +29,7 @@ fi
 echo "Starting cron service..."
 service cron start
 
-# Define the cron job
+# Define the cron job to run the backup script hourly
 CRON_JOB="0 * * * * /usr/bin/python3 ${REPO_DIR}/backup_script.py >> /var/log/palweed_backup.log 2>&1"
 
 # Add cron job if it doesn't exist
