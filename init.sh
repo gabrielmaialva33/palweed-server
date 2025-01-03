@@ -8,7 +8,7 @@ cd "${REPO_DIR}"
 
 # Build and start Docker services
 echo "Starting Docker Compose with build..."
-docker-compose up --build -d
+docker compose up --build -d
 
 # Check if cron is installed
 if ! command -v cron &> /dev/null; then
