@@ -2,5 +2,5 @@
 .env
 docker-compose.dev.yml
 backup
-!backups/*.tar.gz
+!palworld/backups/*.tar.gz
 palworld/
