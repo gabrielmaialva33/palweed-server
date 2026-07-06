@@ -7,9 +7,10 @@ services:
     ports:
       - "${PORT}:${PORT}/udp"          # Game port
       - "${QUERY_PORT}:${QUERY_PORT}/udp"   # Steam query port
-      - "${RCON_PORT}:${RCON_PORT}/tcp"     # RCON (admin remoto)
-    # Todas as variaveis vem do .env (injetadas via env_file).
-    # Nao repetir cada var aqui: env_file ja injeta tudo no container.
+    # RCON is deprecated by the game server; management runs via the REST API
+    # (kept internal, port 8212 not published). RCON left disabled in .env.
+    # All variables come from .env (injected via env_file).
+    # No need to repeat each var here: env_file injects everything into the container.
     env_file:
       - .env
     volumes:
